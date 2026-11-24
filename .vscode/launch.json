@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "▶️ 1. Simulador de Comandos (Interactivo)",
+            "request": "launch",
+            "mainClass": "bo.uagrm.bolsa.simulador.Simulador",
+            "projectName": "bolsa-trabajo-mail"
+        },
+        {
+            "type": "java",
+            "name": "▶️ 2. Demostración Guiada (Paso a Paso)",
+            "request": "launch",
+            "mainClass": "bo.uagrm.bolsa.simulador.DemostracionGuiada",
+            "projectName": "bolsa-trabajo-mail"
+        },
+        {
+            "type": "java",
+            "name": "▶️ 3. Servidor de Correo Real (POP3/SMTP Listener)",
+            "request": "launch",
+            "mainClass": "bo.uagrm.bolsa.Main",
+            "projectName": "bolsa-trabajo-mail"
+        },
+        {
+            "type": "java",
+            "name": "▶️ 4. Verificación de 29 Comandos (Test)",
+            "request": "launch",
+            "mainClass": "bo.uagrm.bolsa.simulador.PruebaFlujoCompleto",
+            "projectName": "bolsa-trabajo-mail"
+        }
+    ]
+}

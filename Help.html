@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bolsa de Trabajos UAGRM - Guía de Comandos y Casos de Uso</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f8f9fa; color: #212529; }
+    h2 { color: #0d6efd; border-bottom: 2px solid #0d6efd; padding-bottom: 8px; }
+    table { border-collapse: collapse; width: 100%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; }
+    th, td { border: 1px solid #dee2e6; padding: 8px 10px; }
+    th { background-color: #e9ecef; font-weight: bold; text-align: left; }
+    code { font-family: Consolas, Monaco, monospace; color: #d63384; background-color: #f8f9fa; padding: 2px 5px; border-radius: 4px; }
+    .cu-col { font-weight: bold; background-color: #fdfdfd; vertical-align: top; width: 25%; }
+    .tables-tag { font-size: 11px; font-weight: normal; color: #6c757d; display: block; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <h2>📋 Guía Oficial de Comandos por Correo - Grupo 04 (Bolsa de Trabajos UAGRM)</h2>
+  <p>Todos los comandos se pueden enviar en el <b>Asunto</b> o en el <b>Cuerpo</b> del correo electrónico. Soportan indistintamente separación por comas (<code>,</code>) o dos puntos (<code>:</code>).</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Caso de Uso / Módulo</th>
+        <th>Comando Oficial y Sintaxis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- CU1 -->
+      <tr>
+        <td rowspan="7" class="cu-col">
+          CU1. Usuarios y Roles
+          <span class="tables-tag">Tablas: usuarios, roles, estudiantes, empresas</span>
+        </td>
+        <td><code>REGISTRAR_DIRECTOR[ci, nombre, apellido, email, password, telefono];</code></td>
+      </tr>
+      <tr><td><code>REGISTRAR_SECRETARIA[ci, nombre, apellido, email, password, telefono];</code></td></tr>
+      <tr><td><code>REGISTRAR_ESTUDIANTE[ci, nombre, apellido, email, password, telefono, ru, carrera, semestre, perfil, cv_url];</code></td></tr>
+      <tr><td><code>REGISTRAR_EMPRESA[ci, nom_rep, ape_rep, email, password, tel, nit, razon, comercial, rubro, dir, web];</code></td></tr>
+      <tr><td><code>LIST[usuarios];</code></td></tr>
+      <tr><td><code>LIST[roles];</code></td></tr>
+      <tr><td><code>SHOW[usuarios, id];</code> <span style="color:#6c757d;">(o <code>SHOW[usuarios: id];</code>)</span></td></tr>
+
+      <!-- CU2 & CU3 -->
+      <tr>
+        <td rowspan="6" class="cu-col">
+          CU2 & CU3. Perfiles e Información
+          <span class="tables-tag">Tablas: estudiantes, empresas, habilidades, areas_laborales</span>
+        </td>
+        <td><code>LIST[estudiantes];</code></td>
+      </tr>
+      <tr><td><code>SHOW[estudiantes, id];</code></td></tr>
+      <tr><td><code>LIST[empresas];</code></td></tr>
+      <tr><td><code>SHOW[empresas, id];</code></td></tr>
+      <tr><td><code>LIST[areas_laborales];</code></td></tr>
+      <tr><td><code>LIST[habilidades];</code></td></tr>
+
+      <!-- CU4 -->
+      <tr>
+        <td rowspan="6" class="cu-col">
+          CU4. Planes y Publicación
+          <span class="tables-tag">Tablas: planes, suscripciones, pagos, facturas, ofertas</span>
+        </td>
+        <td><code>VER_PLANES;</code></td>
+      </tr>
+      <tr><td><code>COMPRAR_PLAN[empresa_id, plan_id];</code></td></tr>
+      <tr><td><code>VERIFICAR_PAGO[pago_id];</code></td></tr>
+      <tr><td><code>PUBLICAR_OFERTA[titulo, area, salario, modalidad, vacantes, skills];</code></td></tr>
+      <tr><td><code>PUBLICAR_OFERTA[empresa_id, titulo, area, salario, modalidad, vacantes, skills];</code></td></tr>
+      <tr><td><code>LIST[facturas];</code></td></tr>
+
+      <!-- CU5 -->
+      <tr>
+        <td rowspan="6" class="cu-col">
+          CU5. Ofertas y Postulaciones
+          <span class="tables-tag">Tablas: ofertas, postulaciones</span>
+        </td>
+        <td><code>VER_OFERTAS;</code></td>
+      </tr>
+      <tr><td><code>VER_OFERTAS[area_laboral];</code> <span style="color:#6c757d;">(Ej: <code>VER_OFERTAS[Software];</code>)</span></td></tr>
+      <tr><td><code>POSTULAR[oferta_id, mensaje];</code></td></tr>
+      <tr><td><code>POSTULAR[oferta_id, estudiante_id, mensaje];</code></td></tr>
+      <tr><td><code>MIS_POSTULACIONES;</code></td></tr>
+      <tr><td><code>MIS_POSTULACIONES[estudiante_id];</code></td></tr>
+
+      <!-- CU6 -->
+      <tr>
+        <td rowspan="4" class="cu-col">
+          CU6. Candidatos y Citas
+          <span class="tables-tag">Tablas: seguimientos, entrevistas</span>
+        </td>
+        <td><code>VER_CANDIDATOS[oferta_id];</code></td>
+      </tr>
+      <tr><td><code>EVALUAR_CANDIDATO[postulacion_id, etapa, observaciones];</code></td></tr>
+      <tr><td><code>AGENDAR_ENTREVISTA[postulacion_id, fecha_hora, modalidad, link_meet, entrevistador, telefono];</code></td></tr>
+      <tr><td><code>LIST[entrevistas];</code></td></tr>
+
+      <!-- CU7 -->
+      <tr>
+        <td rowspan="3" class="cu-col">
+          CU7. Moderación (Director)
+          <span class="tables-tag">Tablas: moderaciones</span>
+        </td>
+        <td><code>MODERAR[oferta_id, APROBAR|RECHAZAR];</code></td>
+      </tr>
+      <tr><td><code>MODERAR[EMPRESA|OFERTA, id, APROBAR|RECHAZAR, motivo];</code></td></tr>
+      <tr><td><code>LIST[v_ofertas_pendientes_moderacion];</code></td></tr>
+
+      <!-- CU8 -->
+      <tr>
+        <td rowspan="5" class="cu-col">
+          CU8. Reportes y Métricas
+          <span class="tables-tag">Vistas estadísticas</span>
+        </td>
+        <td><code>REPORTE[empleabilidad];</code></td>
+      </tr>
+      <tr><td><code>REPORTE[postulaciones];</code></td></tr>
+      <tr><td><code>REPORTE[recaudacion];</code></td></tr>
+      <tr><td><code>REPORTE[empresas];</code></td></tr>
+      <tr><td><code>REPORTE[facturas];</code></td></tr>
+
+      <!-- CRUD -->
+      <tr>
+        <td rowspan="5" class="cu-col">
+          Comandos CRUD Genéricos
+          <span class="tables-tag">Operaciones directas sobre tablas</span>
+        </td>
+        <td><code>LIST[tabla];</code></td>
+      </tr>
+      <tr><td><code>SHOW[tabla, id];</code> <span style="color:#6c757d;">(o <code>SHOW[tabla: id];</code>)</span></td></tr>
+      <tr><td><code>INSERT[tabla: valores...];</code></td></tr>
+      <tr><td><code>UPDATE[tabla, id, columna=valor];</code> <span style="color:#6c757d;">(o <code>UPDATE[tabla: id, columna=valor];</code>)</span></td></tr>
+      <tr><td><code>DELETE[tabla, id];</code> <span style="color:#6c757d;">(o <code>DELETE[tabla: id];</code>)</span></td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

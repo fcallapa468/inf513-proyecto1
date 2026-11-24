@@ -1,0 +1,52 @@
+<configuration>
+    <!-- 1. Salida en Pantalla / Consola -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 2. Archivo de Auditoria y Peticiones General (access.log) -->
+    <appender name="FILE_ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/access-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 3. Archivo Exclusivo de Errores (error.log) -->
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Silenciar logs debug internos de HikariCP para no ensuciar la bitacora -->
+    <logger name="com.zaxxer.hikari" level="WARN" />
+    <logger name="com.zaxxer.hikari.pool.HikariPool" level="WARN" />
+    <logger name="com.zaxxer.hikari.pool.PoolBase" level="WARN" />
+    <logger name="com.zaxxer.hikari.HikariConfig" level="WARN" />
+
+    <!-- Control de logs de sockets y aplicacion -->
+    <logger name="bo.uagrm.bolsa.mail.SmtpCliente" level="INFO" />
+    <logger name="bo.uagrm.bolsa.mail.PopCliente" level="INFO" />
+    <logger name="bo.uagrm.bolsa" level="INFO" />
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE_ACCESS" />
+        <appender-ref ref="FILE_ERROR" />
+    </root>
+</configuration>
